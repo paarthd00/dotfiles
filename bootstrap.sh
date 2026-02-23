@@ -25,6 +25,8 @@ link .zshenv .zshenv
 link .p10k.zsh .p10k.zsh
 link .config/tmux/tmux.conf.local .config/tmux/tmux.conf.local
 link .config/alacritty .config/alacritty
+link .xmonad/xmonad.hs .xmonad/xmonad.hs
+link .xmobarrc .xmobarrc
 
 if [ -L "$HOME/.config/nvim" ]; then
   rm -f "$HOME/.config/nvim"
