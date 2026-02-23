@@ -53,16 +53,7 @@ Useful extras used by this config:
 
 ## Privacy and secrets
 
-- `~/.gitconfig` is intentionally **not** managed by `bootstrap.sh`.
 - This repository should not store personal emails, tokens, private keys, or machine-specific credentials.
-- `.gitconfig` is ignored via `.gitignore`.
-
-Set Git identity locally on each machine:
-
-```sh
-git config --global user.name "Your Name"
-git config --global user.email "your-email@example.com"
-```
 
 ## Repository layout
 
