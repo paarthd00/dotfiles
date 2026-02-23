@@ -1,5 +1,5 @@
 Config
-  { font     = "xft:JetBrains Mono:size=11:antialias=true"
+  { font     = "xft:Fira Code:size=11:antialias=true"
   , bgColor  = "#1e1e2e"
   , fgColor  = "#cdd6f4"
   , position = TopSize L 100 26
