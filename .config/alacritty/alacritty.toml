@@ -1,6 +1,9 @@
 # ~/.config/alacritty/alacritty.toml
 # Minimal Alacritty Configuration - Tokyo Night Theme
 
+[general]
+live_config_reload = true
+
 # Import additional configuration files (optional)
 # import = ["~/.config/alacritty/keybindings.toml"]
 
@@ -44,33 +47,33 @@ class = { instance = "Alacritty", general = "Alacritty" }
 
 # Scrolling
 [scrolling]
-history = 10000
-multiplier = 3
+history = 50000
+multiplier = 5
 
 # Font Configuration
 [font]
 size = 13.0
 
 [font.normal]
-family = "JetBrains Mono"  # or "Fira Code", "Source Code Pro", "Cascadia Code"
+family = "Fira Code"
 style = "Regular"
 
 [font.bold]
-family = "JetBrains Mono"
+family = "Fira Code"
 style = "Bold"
 
 [font.italic]
-family = "JetBrains Mono"
+family = "Fira Code"
 style = "Italic"
 
 [font.bold_italic]
-family = "JetBrains Mono"
+family = "Fira Code"
 style = "Bold Italic"
 
 # Offset for character spacing
 [font.offset]
 x = 0
-y = 1
+y = 0
 
 # Glyph offset
 [font.glyph_offset]
@@ -186,6 +189,11 @@ action = "Copy"
 
 [[keyboard.bindings]]
 key = "Plus"
+mods = "Control"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Equals"
 mods = "Control"
 action = "IncreaseFontSize"
 
