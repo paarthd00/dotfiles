@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -eu
 cd "$(dirname "$0")"
-exec cabal run setup-cli -- --setup-only --yes
+exec cabal run setup-cli -- "$@"
