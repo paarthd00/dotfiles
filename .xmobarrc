@@ -1,7 +1,7 @@
 Config
   { font     = "xft:Fira Code:size=11:antialias=true"
-  , bgColor  = "#1e1e2e"
-  , fgColor  = "#cdd6f4"
+  , bgColor  = "#011627"
+  , fgColor  = "#d6deeb"
   , position = TopSize L 100 26
   , border   = NoBorder
   , commands =
@@ -10,7 +10,7 @@ Config
           [ "-c"
           , "cap=$(cat /sys/class/power_supply/BAT0/capacity); status=$(cat /sys/class/power_supply/BAT0/status); if [ \"$status\" = \"Charging\" ] || [ \"$status\" = \"Full\" ]; then echo \"AC ${cap}%\"; else echo \"BAT ${cap}%\"; fi"
           ] "battery" 50
-      , Run Date "<fc=#89b4fa>%a %d %b</fc>  <fc=#cba6f7>%H:%M</fc>" "date" 50
+      , Run Date "<fc=#82aaff>%a %d %b</fc>  <fc=#c792ea>%H:%M</fc>" "date" 50
       ]
   , template = "  %_XMONAD_LOG%  }{ %battery%  %date%  "
   }

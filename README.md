@@ -7,7 +7,7 @@ Personal Linux dotfiles managed with symlinks.
 - Shell: `.zshrc`, `.zprofile`, `.zshenv`, `.p10k.zsh`
 - Neovim: `.config/nvim/` (Lua config with `lazy.nvim`)
 - Alacritty: `.config/alacritty/`
-- tmux local overrides: `.config/tmux/tmux.conf.local`
+- tmux: `~/.tmux.conf` 
 - XMonad config: `.xmonad/xmonad.hs`
 
 ## Quick start
@@ -64,9 +64,8 @@ Useful extras used by this config:
 ├── .zprofile
 ├── .zshenv
 ├── .p10k.zsh
+├── .tmux.conf
 ├── .config/
 │   ├── nvim/
-│   ├── alacritty/
-│   └── tmux/
-└── .xmonad/
+│   ├── alacritty/└── .xmonad/
 ```
