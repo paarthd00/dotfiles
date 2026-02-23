@@ -22,7 +22,6 @@ HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
   git
-  zsh-syntax-highlighting
   zsh-autosuggestions
   fast-syntax-highlighting
 )
@@ -168,3 +167,12 @@ alias dce='docker exec -it $(docker ps --filter "label=devcontainer.local_folder
 alias dcup='devcontainer up --workspace-folder . --remove-existing-container --log-level info'
 alias dcr='docker rm -f $(docker ps -aq)'
 alias dcvr='docker volume rm $(docker volume ls -q)'
+
+
+alias settings='python3 ~/.settings.py'
+
+[ -f "/home/p/.ghcup/env" ] && . "/home/p/.ghcup/env" # ghcup-env
+
+
+alias zed='flatpak run dev.zed.Zed'
+alias code='flatpak run com.visualstudio.code'
