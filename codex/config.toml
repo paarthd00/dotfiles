@@ -1,3 +1,5 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "high"
 [projects."/home/p"]
 trust_level = "trusted"
 
@@ -9,6 +11,3 @@ trust_level = "trusted"
 
 [projects."/home/p/dotfiles"]
 trust_level = "trusted"
-
-[ui.theme]
-name = "dark-carbon-night"
