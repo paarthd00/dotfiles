@@ -1,1 +1,1 @@
-/home/p/dotfiles/themes/rose-pine/nvim-theme.lua
+/home/p/dotfiles/themes/rose-pine-light/nvim-theme.lua

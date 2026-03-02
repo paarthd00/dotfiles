@@ -133,6 +133,7 @@ if [ "$THEME_ONLY" -eq 0 ]; then
   link_path "$DOTFILES_DIR/.p10k.zsh" "$HOME_DIR/.p10k.zsh"
   link_path "$DOTFILES_DIR/.config/alacritty" "$HOME_DIR/.config/alacritty"
   link_path "$DOTFILES_DIR/.config/nvim" "$HOME_DIR/.config/nvim"
+  link_path "$DOTFILES_DIR/.tmux.conf" "$HOME_DIR/.tmux.conf"
 
   # Optional XMonad config
   if [ -e "$DOTFILES_DIR/.xmonad/xmonad.hs" ]; then
@@ -147,8 +148,11 @@ fi
 
 # Theme links
 link_path "$DOTFILES_DIR/themes/$THEME/alacritty.toml" "$HOME_DIR/.config/alacritty/alacritty.toml"
-link_path "$DOTFILES_DIR/themes/$THEME/tmux.conf" "$HOME_DIR/.tmux.conf"
+link_path "$DOTFILES_DIR/themes/$THEME/tmux.conf" "$HOME_DIR/.tmux-theme.conf"
 link_path "$DOTFILES_DIR/themes/$THEME/nvim-theme.lua" "$HOME_DIR/.config/nvim/lua/paarth/theme.lua"
 
 log "Bootstrap complete."
-log "If tmux is running, reload with: tmux source-file ~/.tmux.conf \\; refresh-client -S"
+if tmux info >/dev/null 2>&1; then
+  tmux source-file ~/.tmux.conf \; refresh-client -S
+  log "tmux config reloaded."
+fi
