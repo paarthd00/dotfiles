@@ -1,13 +1,55 @@
-#custom-quicksettings {
-  margin: 3px 6px;
-  padding: 0 10px;
-  border-radius: 8px;
-  background: rgba(29, 59, 83, 0.28);
-  font-weight: 600;
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+  font-size: 13px;
 }
 
-#custom-quicksettings:hover {
-  background: rgba(29, 59, 83, 0.52);
+window#waybar {
+  background: rgba(1, 22, 39, 0.95);
+  color: #d6deeb;
+  border-bottom: 1px solid #1d3b53;
+}
+
+#workspaces button {
+  margin: 3px 3px;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: #9fb3c8;
+  background: transparent;
+}
+
+#workspaces button:hover {
+  background: #0b253a;
+  color: #d6deeb;
+}
+
+#workspaces button.focused {
+  background: #1d3b53;
+  color: #d6deeb;
+}
+
+#mode,
+#custom-quicksettings,
+#battery,
+#clock {
+  margin: 3px 5px;
+  padding: 0 10px;
+  min-height: 0;
+  border-radius: 8px;
+  background: #0b253a;
+  color: #d6deeb;
+}
+
+#custom-quicksettings {
+  font-weight: 700;
+}
+
+#custom-quicksettings:hover,
+#battery:hover,
+#clock:hover,
+#mode:hover {
+  background: #1d3b53;
 }
 
 menu {

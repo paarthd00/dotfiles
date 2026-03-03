@@ -41,6 +41,7 @@ Theme assets live under `themes/<theme>/` — `alacritty.toml`, `tmux.conf`, `nv
 | `~/.p10k.zsh` | `.p10k.zsh` |
 | `~/.config/alacritty/` | `.config/alacritty/` |
 | `~/.config/nvim/` | `.config/nvim/` |
+| `~/.config/wofi/` | `.config/wofi/` |
 | `~/.config/sway/` | `sway/` |
 | `~/.config/waybar/` | `waybar/` |
 | `~/.tmux.conf` | `.tmux.conf` |

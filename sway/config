@@ -1,7 +1,7 @@
 ### Variables
 set $mod Mod4
 set $terminal ghostty
-set $menu wofi --show drun
+set $menu wofi --show drun --conf ~/.config/wofi/config --style ~/.config/wofi/style.css
 
 ### Output
 output * bg #011627 solid_color
@@ -29,6 +29,7 @@ gaps inner 6
 bindsym $mod+Return      exec $terminal
 bindsym Ctrl+Alt+t       exec $terminal
 bindsym $mod+d           exec $menu
+bindsym Ctrl+d           exec $menu
 bindsym $mod+Shift+q     kill
 bindsym $mod+Shift+e     exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit' 'swaymsg exit'
 bindsym $mod+Shift+r     reload

@@ -1,0 +1,12 @@
+width=760
+height=440
+location=top
+yoffset=72
+prompt=Search
+show=drun
+insensitive=true
+allow_images=true
+normal_window=true
+hide_scroll=true
+gtk_dark=true
+no_actions=true
