@@ -1,8 +1,8 @@
 {
-  "theme": "dark-ansi",
   "numStartups": 59,
   "installMethod": "native",
   "autoUpdates": false,
+  "theme": "dark-ansi",
   "tipsHistory": {
     "new-user-warmup": 8,
     "plan-mode-for-complex-tasks": 54,
@@ -108,7 +108,10 @@
     "tengu_summarize_tool_results": false,
     "tengu_coral_whistle": false,
     "tengu_tst_kx7": false,
-    "tengu_immediate_model_command": false
+    "tengu_immediate_model_command": false,
+    "tengu_sm_compact": false,
+    "tengu_compact_cache_prefix": true,
+    "tengu_compact_streaming_retry": false
   },
   "firstStartTime": "2026-02-21T06:44:53.533Z",
   "opusProMigrationComplete": true,
