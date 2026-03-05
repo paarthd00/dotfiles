@@ -12,6 +12,63 @@ log() {
   printf '%s\n' "$*"
 }
 
+# ── macOS dependency installation ────────────────────────────────────────────
+
+install_macos_deps() {
+  log "==> Installing macOS dependencies..."
+
+  # Homebrew
+  if ! command -v brew >/dev/null 2>&1; then
+    log "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  # Brew bundle
+  log "Installing packages from Brewfile..."
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
+
+  # oh-my-zsh
+  if [ ! -d "$HOME_DIR/.oh-my-zsh" ]; then
+    log "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
+
+  # zsh plugins
+  ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME_DIR/.oh-my-zsh/custom}"
+  if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+  fi
+  if [ ! -d "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" ]; then
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
+  fi
+  if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
+    git clone https://github.com/marlonrichert/zsh-autocomplete "$ZSH_CUSTOM/plugins/zsh-autocomplete"
+  fi
+
+  # Powerlevel10k theme
+  if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
+  fi
+
+  # nvm
+  if [ ! -d "$HOME_DIR/.nvm" ]; then
+    log "Installing nvm..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  fi
+
+  # bun
+  if [ ! -d "$HOME_DIR/.bun" ]; then
+    log "Installing bun..."
+    curl -fsSL https://bun.sh/install | bash
+  fi
+
+  log "==> macOS dependencies installed."
+}
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  install_macos_deps
+fi
+
 usage() {
   cat <<EOF
 Usage: ./bootstrap.sh [--theme THEME] [--yes] [--theme-only]
@@ -98,7 +155,8 @@ choose_theme() {
   fi
 
   log "Select a theme:"
-  choices="$(find "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort)"
+  FIND="$(command -v gfind || command -v find)"
+  choices="$($FIND "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' 2>/dev/null | sort || $FIND "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort)"
   idx=1
   default_idx=1
   for name in $choices; do

@@ -64,7 +64,10 @@ alias zshconfig="nvim ~/.zshrc"
 alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
 alias activator='./activator -Djline.terminal=jline.UnsupportedTerminal'
 # Better ls (prefer exa > colorls > ls)
-if command -v exa &>/dev/null; then
+if command -v eza &>/dev/null; then
+  alias ls="eza"
+  alias la="eza --long --all --group"
+elif command -v exa &>/dev/null; then
   alias ls="exa"
   alias la="exa --long --all --group"
 elif command -v colorls &>/dev/null; then
@@ -74,7 +77,7 @@ fi
 alias zed='flatpak run dev.zed.Zed'
 alias code='flatpak run com.visualstudio.code'
 alias dce='docker exec -it $(docker ps --filter "label=devcontainer.local_folder=$(pwd)" -q) bash'
-alias dcup='devcontainer up --workspace-folder . --remove-existing-container --log-level info'
+alias dcup='bash ./dcup.sh'
 alias dcr='docker rm -f $(docker ps -aq)'
 alias dcvr='docker volume rm $(docker volume ls -q)'
 alias settings='python3 ~/.settings.py'
@@ -174,3 +177,5 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 alias dce='docker exec -it $(docker ps --filter "label=devcontainer.local_folder=$(pwd)" -q) bash'
 alias dcup='devcontainer up --workspace-folder . --remove-existing-container --log-level info'
+ 
+

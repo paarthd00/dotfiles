@@ -111,3 +111,18 @@ action = "ResetFontSize"
 key = "N"
 mods = "Control|Shift"
 action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Alt"
+chars = "\u001bl"
+
+[[keyboard.bindings]]
+key = "["
+mods = "Alt"
+chars = "\u001b["
+
+[[keyboard.bindings]]
+key = "]"
+mods = "Alt"
+chars = "\u001b]"
