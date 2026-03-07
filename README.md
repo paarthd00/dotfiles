@@ -1,6 +1,6 @@
-# dotfiles
+# WindowManger
 
-Personal Linux dotfiles with theme switching for Sway and XMonad.
+Personal Linux config with theme switching for Sway and XMonad.
 
 ## Prerequisites
 
@@ -35,8 +35,8 @@ The bootstrap will detect missing tools and offer to install `ripgrep` automatic
 ## Quick start
 
 ```sh
-git clone git@github.com:paarthd00/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone git@github.com:paarthd00/dotfiles.git ~/WindowManger
+cd ~/WindowManger
 ./bootstrap.sh
 ```
 
@@ -44,7 +44,7 @@ The script will:
 1. Check for required dependencies (and offer to install `ripgrep`)
 2. Prompt for a theme
 3. Ask which components to set up (Zsh, Oh My Zsh, plugins, tmux)
-4. Link all dotfiles and apply the selected theme
+4. Link all configs and apply the selected theme
 5. Reload Sway or restart XMonad if running
 
 ---
@@ -116,7 +116,7 @@ The `.zshrc` uses these plugins — install them manually into `$ZSH_CUSTOM/plug
 | `~/.config/sway/` | `managers/sway/` |
 | `~/.config/waybar/` | `managers/sway/waybar/` |
 | `~/.tmux.conf` | `home/profile/zsh_tmux_conf.zsh` |
-| `~/.xmonad/xmonad.hs` | `windowmanger/xmonad/xmonad.hs` |
+| `~/.xmonad/xmonad.hs` | `managers/xmonad/xmonad.hs` |
 | `~/.codex/config.toml` | `codex/config.toml` |
 | `~/.claude.json` | `claude/config.json` |
 
@@ -128,7 +128,7 @@ The `.zshrc` uses these plugins — install them manually into `$ZSH_CUSTOM/plug
 | `~/.tmux-theme.conf` | `themes/<theme>/tmux.conf` |
 | `~/.config/nvim/lua/paarth/theme.lua` | `themes/<theme>/nvim-theme.lua` |
 | `~/.config/sway/colors.conf` | `themes/<theme>/sway-colors.conf` *(Sway only)* |
-| `~/.config/waybar/style.css` | `themes/<theme>/waybar-colors.css` + `waybar/style-base.css` *(Sway only)* |
+| `~/.config/waybar/style.css` | `themes/<theme>/waybar-colors.css` + `managers/sway/waybar/style-base.css` *(Sway only)* |
 | `~/.config/wofi/style.css` | `themes/<theme>/wofi-colors.css` + `home/config/wofi/style-base.css` *(Sway only)* |
 | `~/xmobarrc` | `themes/<theme>/xmobarrc` *(XMonad only)* |
 | `~/.xmonad/lib/Colors.hs` | `themes/<theme>/xmonad-colors.hs` *(XMonad only)* |
