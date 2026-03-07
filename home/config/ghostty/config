@@ -1,0 +1,12 @@
+font-family = Fira Code
+font-size = 14
+window-padding-x = 13
+window-padding-y = 12
+cursor-style = block
+cursor-style-blink = false
+scrollback-limit = 50001
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# Theme (set by bootstrap.sh)
+config-file = ~/.config/ghostty/theme
