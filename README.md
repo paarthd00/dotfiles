@@ -1,4 +1,4 @@
-# WindowManger
+# Window Manger Theme
 
 Personal Linux config with theme switching for Sway and XMonad.
 
