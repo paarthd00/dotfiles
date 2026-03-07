@@ -41,6 +41,23 @@ has_omz_plugin() { [ -d "$ZSH_CUSTOM/plugins/$1" ]; }
 wm_is_running() { pgrep -x "$1" >/dev/null 2>&1; }
 is_light_theme() { case "$1" in *light*) return 0 ;; *) return 1 ;; esac; }
 
+# Push OSC color sequences to all user-owned pts devices for live theme update.
+# Works in any running terminal that supports OSC 4/10/11/12 (ghostty, alacritty, etc.)
+push_osc_colors() {
+  theme_file="$1"
+  [ -f "$theme_file" ] || return 0
+  sequences="$(awk '
+    /^background = /   { printf "\033]11;%s\007", $3 }
+    /^foreground = /   { printf "\033]10;%s\007", $3 }
+    /^cursor-color = / { printf "\033]12;%s\007", $3 }
+    /^palette = /      { split($3, a, "="); printf "\033]4;%s;%s\007", a[1], a[2] }
+  ' "$theme_file")"
+  for pts in /dev/pts/*; do
+    [ -c "$pts" ] && [ -w "$pts" ] || continue
+    printf '%s' "$sequences" > "$pts" 2>/dev/null || true
+  done
+}
+
 link_path() {
   src="$1"
   dst="$2"
@@ -104,7 +121,7 @@ check_deps() {
 
 require_theme_assets() {
   chosen="$1"
-  for rel in alacritty.toml tmux.conf nvim-theme.lua sway-colors.conf waybar-colors.css wofi-colors.css xmobarrc xmonad-colors.hs; do
+  for rel in alacritty.toml tmux.conf nvim-theme.lua sway-colors.conf waybar-colors.css wofi-colors.css xmobarrc xmonad-colors.hs ghostty.conf; do
     [ -f "$THEMES_DIR/$chosen/$rel" ] || {
       log "error: missing theme asset: $THEMES_DIR/$chosen/$rel"
       exit 1
@@ -214,6 +231,7 @@ if [ "$THEME_ONLY" -eq 0 ]; then
     log "  skip: alacritty config (not installed)"
   fi
 
+
   link_path "$DOTFILES_DIR/home/config/nvim" "$HOME_DIR/.config/nvim"
 
   # Sway — only if detected
@@ -258,9 +276,32 @@ if has_cmd alacritty; then
     log "  created: alacritty.toml with theme import"
   elif ! grep -q 'theme.toml' "$HOME_DIR/.config/alacritty/alacritty.toml"; then
     log "  warn: alacritty.toml does not import theme.toml"
+  else
+    # Touch the main config to trigger alacritty's inotify watcher (symlink re-targeting doesn't fire it)
+    touch "$HOME_DIR/.config/alacritty/alacritty.toml"
+    log "  alacritty config touched (live reload triggered)"
   fi
 else
   log "  skip: alacritty theme (not installed)"
+fi
+
+# Ghostty theme
+if has_cmd ghostty; then
+  mkdir -p "$HOME_DIR/.config/ghostty"
+  link_path "$DOTFILES_DIR/themes/$THEME/ghostty.conf" "$HOME_DIR/.config/ghostty/theme"
+  ghostty_cfg="$HOME_DIR/.config/ghostty/config"
+  if [ ! -f "$ghostty_cfg" ]; then
+    cp "$DOTFILES_DIR/home/config/ghostty/config" "$ghostty_cfg"
+    log "  created: ghostty config"
+  elif ! grep -q 'config-file.*theme' "$ghostty_cfg"; then
+    printf '\n# Theme (set by bootstrap.sh)\nconfig-file = ~/.config/ghostty/theme\n' >> "$ghostty_cfg"
+    log "  patched: ghostty config (added config-file directive)"
+  fi
+  touch "$ghostty_cfg"
+  push_osc_colors "$DOTFILES_DIR/themes/$THEME/ghostty.conf"
+  log "  ghostty theme applied (existing windows updated via OSC sequences)"
+else
+  log "  skip: ghostty theme (not installed)"
 fi
 
 # Neovim theme (always — nvim config linked regardless of nvim presence)
