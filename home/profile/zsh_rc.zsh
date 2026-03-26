@@ -11,23 +11,24 @@ fi
 export LC_ALL=en_CA.utf8
 export LANG=en_CA.utf8
 
-# ───────────────────────────────────────────────────────────────────
-#  Oh My Zsh
-# ───────────────────────────────────────────────────────────────────
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-HIST_STAMPS="mm/dd/yyyy"
+# Editor
+export EDITOR='zed --wait'
+export VISUAL='zed --wait'
 
-plugins=(
-  git
-  zsh-autosuggestions
-  fast-syntax-highlighting
-)
+# ───────────────────────────────────────────────────────────────────
+#  Nix-Managed Shell Plugins
+# ───────────────────────────────────────────────────────────────────
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+typeset -U fpath
 
-source $ZSH/oh-my-zsh.sh
-source "$HOME/.oh-my-zsh/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+setopt correct
+
+# zsh-autocomplete expects to manage compinit itself and is only useful in real terminals.
+if [[ "$TERM" != "dumb" ]] && [[ -r "$RANG_ZSH_AUTOCOMPLETE" ]]; then
+  source "$RANG_ZSH_AUTOCOMPLETE"
+fi
+[[ -r "$RANG_ZSH_POWERLEVEL10K" ]] && source "$RANG_ZSH_POWERLEVEL10K"
+[[ -r "$RANG_ZSH_AUTOSUGGESTIONS" ]] && source "$RANG_ZSH_AUTOSUGGESTIONS"
 
 # ───────────────────────────────────────────────────────────────────
 #  PATH
@@ -65,7 +66,10 @@ command -v npm         &>/dev/null && alias h2='$(npm prefix -s)/node_modules/.b
 command -v python3     &>/dev/null && alias settings='python3 ~/.settings.py'
 
 # ls — use best available
-if command -v exa &>/dev/null; then
+if command -v eza &>/dev/null; then
+  alias ls='eza'
+  alias la='eza --long --all --group'
+elif command -v exa &>/dev/null; then
   alias ls='exa'
   alias la='exa --long --all --group'
 elif command -v colorls &>/dev/null; then
@@ -75,7 +79,6 @@ fi
 
 # Flatpak apps
 command -v flatpak &>/dev/null && {
-  alias zed='flatpak run dev.zed.Zed'
   alias code='flatpak run com.visualstudio.code'
 }
 
@@ -93,7 +96,8 @@ command -v devcontainer &>/dev/null && {
 # ───────────────────────────────────────────────────────────────────
 #  FZF
 # ───────────────────────────────────────────────────────────────────
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -r "$RANG_FZF_COMPLETION" ]] && source "$RANG_FZF_COMPLETION"
+[[ -r "$RANG_FZF_KEY_BINDINGS" ]] && source "$RANG_FZF_KEY_BINDINGS"
 
 # Use fd if available, fallback to find
 if command -v fd &>/dev/null; then
@@ -174,19 +178,15 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #  Powerlevel10k
 # ───────────────────────────────────────────────────────────────────
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+# Syntax highlighting should load after other shell widgets and completions.
+[[ -r "$RANG_ZSH_SYNTAX_HIGHLIGHTING" ]] && source "$RANG_ZSH_SYNTAX_HIGHLIGHTING"
 
 # ───────────────────────────────────────────────────────────────────
 #  Startup Banner (causes prompt jump - remove if unwanted)
 # ───────────────────────────────────────────────────────────────────
 [[ -t 1 ]] && command -v neofetch &>/dev/null && neofetch
-[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
-
-
-
-# bun completions
-[ -s "/home/p/.bun/_bun" ] && source "/home/p/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+[[ ":$PATH:" != *":$BUN_INSTALL/bin:"* ]] && export PATH="$BUN_INSTALL/bin:$PATH"

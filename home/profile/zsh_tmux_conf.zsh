@@ -1,4 +1,4 @@
-# tmux config for this dotfiles repo.
+# tmux config for rang.
 
 set -g default-terminal "tmux-256color"
 set -as terminal-features ",xterm-256color:RGB,alacritty:RGB"
@@ -13,5 +13,5 @@ bind C-a send-prefix
 bind - split-window -v -c "#{pane_current_path}"
 bind _ split-window -h -c "#{pane_current_path}"
 
-# Source theme (set by bootstrap.sh)
+# Source theme managed by rang
 source-file -q ~/.tmux-theme.conf
