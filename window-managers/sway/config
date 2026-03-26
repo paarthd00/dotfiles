@@ -1,4 +1,4 @@
-### Theme (set by bootstrap.sh)
+### Theme managed by rang
 include ~/.config/sway/colors.conf
 
 ### Output layout (managed by nwg-displays)
@@ -7,6 +7,7 @@ include ~/.config/sway/outputs
 ### Variables
 set $mod Mod4
 set $terminal ghostty
+set $editor zed
 set $menu wofi --show drun --conf ~/.config/wofi/config --style ~/.config/wofi/style.css
 
 ### Output

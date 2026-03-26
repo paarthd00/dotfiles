@@ -1,4 +1,4 @@
 return {
-  colorscheme = 'night-owl',
-  transparent = true,
+  colorscheme = 'oxocarbon',
+  transparent = false,
 }
