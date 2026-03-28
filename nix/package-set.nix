@@ -11,12 +11,7 @@ let
     '';
 
   zedCli = pkgs.writeShellScriptBin "zed" ''
-    if [ -S "''${XDG_RUNTIME_DIR}/wayland-0" ]; then
-      export WAYLAND_DISPLAY=wayland-0
-    else
-      unset WAYLAND_DISPLAY
-    fi
-    exec ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.zed-editor}/bin/zeditor "$@"
+  exec ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.zed-editor}/bin/zeditor "$@"
   '';
 
   common = with pkgs; [
