@@ -281,11 +281,6 @@ apply_home_manager() {
   fi
 
   nix run github:nix-community/home-manager -- switch -b "$BACKUP_EXT" --impure --flake "path:$DOTFILES_DIR#default"
-      continue
-    fi
-
-    remove_legacy_child_links "$path"
-  done
 }
 
 find_fedora_binary() {
