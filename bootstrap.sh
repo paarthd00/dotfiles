@@ -391,6 +391,44 @@ apply_theme() {
   "$DOTFILES_DIR/scripts/set-theme.sh" "$THEME"
 }
 
+print_summary() {
+  log ""
+  log "========================================"
+  log "  damnenv setup complete"
+  log "========================================"
+  log ""
+  log "  Theme      : $THEME"
+  log ""
+  log "  Packages installed:"
+  log "    Core      : git, neovim, nodejs, zsh, tmux, fzf, fd, bat, eza, ripgrep"
+  log "    Desktop   : alacritty, ghostty, zed"
+  log "    Browser   : firefox"
+  log "    AI CLI    : claude-code, codex, opencode"
+  log "    Sway      : sway, waybar, wofi, mako, swayidle, swaylock"
+  log "    XMonad    : xmonad, xmobar"
+  log "    Fonts     : Fira Code, JetBrains Mono Nerd Font"
+  log ""
+  log "  Configs managed:"
+  log "    zsh       : ~/.zshrc, ~/.zprofile, ~/.zshenv"
+  log "    tmux      : ~/.tmux.conf"
+  log "    nvim      : ~/.config/nvim/"
+  log "    alacritty : ~/.config/alacritty/"
+  log "    ghostty   : ~/.config/ghostty/"
+  log "    sway      : ~/.config/sway/, ~/.config/waybar/, ~/.config/wofi/"
+  log "    xmonad    : ~/.xmonad/, ~/xmobarrc"
+  log ""
+  log "  Launchers  : zed, alacritty, ghostty desktop entries registered"
+  log ""
+  if has_cmd zed; then
+    log "  Run 'zed .' to open Zed in the current directory"
+  fi
+  if has_cmd ghostty; then
+    log "  Run 'ghostty' to open the terminal"
+  fi
+  log "========================================"
+  log ""
+}
+
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --theme)
@@ -425,5 +463,4 @@ migrate_legacy_links
 apply_home_manager
 remove_fedora_overlap
 apply_theme
-log ""
-log "damnenv applied."
+print_summary

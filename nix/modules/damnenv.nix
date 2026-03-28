@@ -351,6 +351,47 @@ in
       })
     ];
 
+    xdg.desktopEntries = lib.mkMerge [
+      (lib.optionalAttrs cfg.packageSets.desktop {
+        zed = {
+          name = "Zed";
+          genericName = "Text Editor";
+          comment = "A high-performance, multiplayer code editor.";
+          exec = "zeditor %U";
+          icon = "${pkgs.zed-editor}/share/icons/hicolor/512x512/apps/zed.png";
+          categories = [ "Utility" "TextEditor" "Development" "IDE" ];
+          mimeType = [ "text/plain" "application/x-zerosize" "x-scheme-handler/zed" ];
+          startupNotify = true;
+          actions = {
+            "NewWorkspace" = {
+              name = "Open a new workspace";
+              exec = "zeditor --new %U";
+            };
+          };
+        };
+
+        alacritty = {
+          name = "Alacritty";
+          genericName = "Terminal";
+          comment = "A fast, cross-platform, OpenGL terminal emulator";
+          exec = "alacritty";
+          icon = "${pkgs.alacritty}/share/icons/hicolor/scalable/apps/Alacritty.svg";
+          categories = [ "System" "TerminalEmulator" ];
+          startupNotify = true;
+        };
+
+        ghostty = {
+          name = "Ghostty";
+          genericName = "Terminal";
+          comment = "Fast, feature-rich, and cross-platform terminal";
+          exec = "ghostty";
+          icon = "${pkgs.ghostty}/share/icons/hicolor/256x256/apps/com.mitchellh.ghostty.png";
+          categories = [ "System" "TerminalEmulator" ];
+          startupNotify = true;
+        };
+      })
+    ];
+
     xdg.configFile = lib.mkMerge [
       (lib.optionalAttrs cfg.manage.alacritty {
         "alacritty/alacritty.toml".source = repo + "/home/config/alacritty/alacritty.toml";
